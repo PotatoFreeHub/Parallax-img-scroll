@@ -35,38 +35,38 @@ function parallaxImgScroll(settings) {
 
   //$(document).ready(function (){
 
-    $(".parallax-move").css({
-      'opacity' : 0,
-      'position': "absolute"
+  $(".parallax-move").css({
+    'opacity' : 0,
+    'position': "absolute"
+  });
+
+  if (parallaxSettings.pageLoader) {
+    var loadingMaringTop = $(window).height() / 2;
+    $("body").wrapInner( "<div class='parallaxImg-page'></div>");
+    $("body").css({
+      'height': '100%',
+      'width': '100%'
+    });
+    $("body").prepend("<div class='parallaxImg-loading-page'></div>");
+    $(".parallaxImg-loading-page").css({
+      'position': 'absolute',
+      'top': '0px',
+      'left': '0px',
+      'width': '100%',
+      'height': '100%',
+      'background': '#333',
+    });
+    $(".parallaxImg-loading-page").prepend("<div class='parallaxImg-loading-text'>Loading Page</div>");
+    $(".parallaxImg-loading-text").css({
+      'width': '300px',
+      'margin-left': 'auto',
+      'margin-right': 'auto',
+      'text-align': 'center',
+      'padding-top': loadingMaringTop + 'px'
     });
 
-    if (parallaxSettings.pageLoader) {
-      var loadingMaringTop = $(window).height() / 2;
-      $("body").wrapInner( "<div class='parallaxImg-page'></div>");
-      $("body").css({
-        'height': '100%',
-        'width': '100%'
-      });
-      $("body").prepend("<div class='parallaxImg-loading-page'></div>");
-      $(".parallaxImg-loading-page").css({
-        'position': 'absolute',
-        'top': '0px',
-        'left': '0px',
-        'width': '100%',
-        'height': '100%',
-        'background': '#333',
-      });
-      $(".parallaxImg-loading-page").prepend("<div class='parallaxImg-loading-text'>Loading Page</div>");
-      $(".parallaxImg-loading-text").css({
-        'width': '300px',
-        'margin-left': 'auto',
-        'margin-right': 'auto',
-        'text-align': 'center',
-        'padding-top': loadingMaringTop + 'px'
-      });
-
-      $(".parallaxImg-page").hide();
-    }
+    $(".parallaxImg-page").hide();
+  }
   //});
 
   $(window).on("load", function() {
