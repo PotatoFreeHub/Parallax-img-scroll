@@ -14,7 +14,7 @@ and personal use =D
 */
 
 //reset the scroll to 0 (top of page)
-$(window).on('beforeunload', function() {
+$(window).on("beforeunload", function() {
   $(window).scrollTop(0);
 });
 
@@ -33,64 +33,61 @@ function parallaxImgScroll(settings) {
   var lastestScrolled = 0;
   var scrolled = 0;
 
-  $(document).ready(function (){
+  //$(document).ready(function (){
 
     $(".parallax-move").css({
       'opacity' : 0,
-      position: "absolute"
+      'position': "absolute"
     });
 
     if (parallaxSettings.pageLoader) {
-      var loadingMaringTop = $(window).height() / 2
+      var loadingMaringTop = $(window).height() / 2;
       $("body").wrapInner( "<div class='parallaxImg-page'></div>");
       $("body").css({
-        height: '100%',
-        width: '100%'
-      })
-      $("body").prepend("<div class='parallaxImg-loading-page'></div>")
+        'height': '100%',
+        'width': '100%'
+      });
+      $("body").prepend("<div class='parallaxImg-loading-page'></div>");
       $(".parallaxImg-loading-page").css({
-        position: 'absolute',
-        top: '0px',
-        left: '0px',
-        width: '100%',
-        height: '100%',
-        background: '#333',
-      })
-      $(".parallaxImg-loading-page").prepend("<div class='parallaxImg-loading-text'>Loading Page</div>")
+        'position': 'absolute',
+        'top': '0px',
+        'left': '0px',
+        'width': '100%',
+        'height': '100%',
+        'background': '#333',
+      });
+      $(".parallaxImg-loading-page").prepend("<div class='parallaxImg-loading-text'>Loading Page</div>");
       $(".parallaxImg-loading-text").css({
-        width: '300px',
+        'width': '300px',
         'margin-left': 'auto',
         'margin-right': 'auto',
         'text-align': 'center',
         'padding-top': loadingMaringTop + 'px'
-      })
+      });
 
-      $(".parallaxImg-page").hide()
+      $(".parallaxImg-page").hide();
     }
+  //});
 
-  })
-
-  $(window).load(function() {
+  $(window).on("load", function() {
     $(".parallax-move").css({
       'opacity' : parallaxSettings.initialOpacity
     });
 
     if (parallaxSettings.pageLoader) {
-      $(".parallaxImg-loading-page").fadeOut('600', function() {
-        $(".parallaxImg-page").fadeIn()
-        $(this).remove()
+      $(".parallaxImg-loading-page").fadeOut(600, function() {
+        $(".parallaxImg-page").fadeIn();
+        $(this).remove();
         parallaxImgInit();
-      })
-    }
-    else {
+      });
+    } else {
       parallaxImgInit();
     }
 
     /* Scroll event to trigger the function */
-    $(window).bind('scroll',function(e){
-      parallaxImgScroll();
+    $(window).scroll(function(e){
+      parallaxImgagesScroll();
     });
-
   });
 
   /* Initial setup of the elements */
@@ -106,11 +103,10 @@ function parallaxImgScroll(settings) {
           $(setOfElements[i]).css({
             "z-index": 100,
             "position": "relative"
-          })
+          });
         }
         // for all the elements that have the class "parallax-move"
         else {
-
           // if the element has a Speed declared
           if ($(setOfElements[i]).hasData('ps-speed')) {
             scrollSpeed = $(setOfElements[i]).data('ps-speed');
@@ -165,33 +161,32 @@ function parallaxImgScroll(settings) {
           });
 
           /* Apply initial position */
-          console.log(leftPosition, rightPosition)
-          if (leftPosition) {
+          if (leftPosition !== 'undefined') {
             $(setOfElements[i]).css({
-              "bottom": TopPosition,
-              "left": leftPosition,
-              "z-index": zPosition
-            })
-          } else {
+              'bottom': TopPosition,
+              'left': leftPosition,
+              'z-index': zPosition
+            });
+          };
+          if (rightPosition !== 'undefined') {
             $(setOfElements[i]).css({
               "bottom": TopPosition,
               "right": rightPosition,
               "z-index": zPosition
-            })
+            });
           }
         }
       }
     });
 
     $(".parallax-img-container").css({
-      position: "relative",
-      overflow: "hidden"
+      'position': "relative",
+      'overflow': "hidden"
     });
-
   }
 
   /* Move the images while scrolling the page */
-  function parallaxImgScroll() {
+  function parallaxImgagesScroll() {
 
     scrolled = $(window).scrollTop();
 
@@ -239,7 +234,7 @@ function parallaxImgScroll(settings) {
         }
 
         $(parallaxElementsArray[i].element).css({
-          "opacity" : alpha,
+          'opacity' : alpha,
           'bottom': (parallaxElementsArray[i].verticalPagePosition + (parallaxElementsArray[i].privateScrolled * parallaxElementsArray[i].scrollSpeed)) + 'px'
           });
 
@@ -265,10 +260,9 @@ function parallaxImgScroll(settings) {
       }
     }
   }
-
 }
 
 /* check if a data attribute exists */
 $.fn.hasData = function(attrName) {
-  return (typeof $(this).data(attrName) != 'undefined');
+  return (typeof $(this).data(attrName) !== 'undefined');
 };
