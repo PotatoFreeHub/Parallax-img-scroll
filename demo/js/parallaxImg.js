@@ -74,7 +74,7 @@ function parallaxImgScroll(settings) {
       'opacity' : parallaxSettings.initialOpacity
     });
 
-    if (parallaxSettings.pageLoader) {
+    if (parallaxSettings.pageLoader) {      
       $(".parallaxImg-loading-page").fadeOut(600, function() {
         $(".parallaxImg-page").fadeIn();
         $(this).remove();
@@ -97,19 +97,17 @@ function parallaxImgScroll(settings) {
       var widthOfContainer = $(this).width();
       var heightOfContainer = $(this).height();
       var setOfElements = $(this).children();
-      for (i = 0; i < setOfElements.length ; i++) {
-        var classApplied = $(setOfElements[i]).attr('class');
+      setOfElements.each(function() {
+        var classApplied = $(this).attr('class');
         if (classApplied != "parallax-move") {
-          $(setOfElements[i]).css({
+          $(this).css({
             "z-index": 100,
             "position": "relative"
           });
-        }
-        // for all the elements that have the class "parallax-move"
-        else {
+        } else {
           // if the element has a Speed declared
-          if ($(setOfElements[i]).hasData('ps-speed')) {
-            scrollSpeed = $(setOfElements[i]).data('ps-speed');
+          if ($(this).hasData('ps-speed')) {
+            scrollSpeed = $(this).data('ps-speed');
           }
           else {
             var ranNumSpeed = Math.floor((Math.random() * 100) + 1);
@@ -122,20 +120,20 @@ function parallaxImgScroll(settings) {
           }
 
           //if the element has a vertical position declared
-          if ($(setOfElements[i]).hasData('ps-vertical-position')) {
-            TopPosition = $(setOfElements[i]).data('ps-vertical-position');
+          if ($(this).hasData('ps-vertical-position')) {
+            TopPosition = $(this).data('ps-vertical-position');
           }
           else {
             var TopPosition = Math.floor(Math.random() * (heightOfContainer - (heightOfContainer/4)) + 1);
           }
 
           //if the element has an horizontal position declared
-          if ($(setOfElements[i]).hasData('ps-horizontal-position')) {
-            var leftPosition = $(setOfElements[i]).data('ps-horizontal-position');
+          if ($(this).hasData('ps-horizontal-position')) {
+            var leftPosition = $(this).data('ps-horizontal-position');
             var rightPosition = undefined;
           }
-          else if ($(setOfElements[i]).hasData('ps-horizontal-position-right')) {
-            var rightPosition = $(setOfElements[i]).data('ps-horizontal-position-right');
+          else if ($(this).hasData('ps-horizontal-position-right')) {
+            var rightPosition = $(this).data('ps-horizontal-position-right');
             var leftPosition = undefined;
           } else {
             var leftPosition = Math.floor(Math.random() * (widthOfContainer - 100) + 50);
@@ -143,15 +141,15 @@ function parallaxImgScroll(settings) {
           }
 
           //if the element has a z-index declared
-          if ($(setOfElements[i]).hasData('ps-z-index')) {
-            var zPosition = $(setOfElements[i]).data('ps-z-index');
+          if ($(this).hasData('ps-z-index')) {
+            var zPosition = $(this).data('ps-z-index');
           }
           else {
             var zPosition = Math.floor(Math.random() * 10 + 1);
           }
 
           parallaxElementsArray.push({
-            "element" : $(setOfElements[i]),
+            "element" : $(this),
             "scrollSpeed" : scrollSpeed,
             "horizontalPagePosition" : leftPosition,
             "horizontalPagePositionRight" : rightPosition,
@@ -162,21 +160,21 @@ function parallaxImgScroll(settings) {
 
           /* Apply initial position */
           if (leftPosition !== 'undefined') {
-            $(setOfElements[i]).css({
+            $(this).css({
               'bottom': TopPosition,
               'left': leftPosition,
               'z-index': zPosition
             });
           };
           if (rightPosition !== 'undefined') {
-            $(setOfElements[i]).css({
+            $(this).css({
               "bottom": TopPosition,
               "right": rightPosition,
               "z-index": zPosition
             });
           }
         }
-      }
+      });
     });
 
     $(".parallax-img-container").css({
