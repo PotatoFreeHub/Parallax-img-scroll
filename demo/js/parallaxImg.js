@@ -86,7 +86,7 @@ function parallaxImgScroll(settings) {
 
     /* Scroll event to trigger the function */
     $(window).scroll(function(e){
-      parallaxImgagesScroll();
+      parallaxImagesScroll();
     });
   });
 
@@ -184,7 +184,7 @@ function parallaxImgScroll(settings) {
   }
 
   /* Move the images while scrolling the page */
-  function parallaxImgagesScroll() {
+  function parallaxImagesScroll() {
 
     scrolled = $(window).scrollTop();
 
