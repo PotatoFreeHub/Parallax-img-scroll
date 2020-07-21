@@ -17,13 +17,13 @@
         opacitySpeed: 0.1, //values from 0.01 to 1 -> 0.01: slowly appears on screen; 1: appears as soon as the user scrolls 1px
         pageLoader: true
       };
-
       parallaxImgScroll(parallaxSettings);
     });
 
     $(function() {
       $("body").niceScroll({
         scrollspeed: 400,
+        zindex: 10,
         hwacceleration: true
         });
     });
